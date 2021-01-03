@@ -43,7 +43,7 @@ Example for Turbo Frame in [todo/index.plush.html](templates/todo/index.plush.ht
 Turbo Streams allow the server to send just fragments of HTML over the wire and only replace these fragements on the client. The example uses Turbo Streams to create new todos.
 
 
-The submitted form either returns a Turbo Stream if possible, see [todo.go](actions/todo.go):
+The submitted form returns a Turbo Stream if possible, see [todo.go](actions/todo.go):
 ```go
 if acceptsTurboStream(c.Request()) {
 	// Handle Turbo requests
