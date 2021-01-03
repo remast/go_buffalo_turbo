@@ -51,8 +51,13 @@ func App() *buffalo.App {
 		// Setup and use translations:
 		app.Use(translations())
 
-		app.GET("/", HomeHandler)
+		app.GET("/", TodoIndex)
 
+		app.GET("/feed", FeedIndex)
+
+		app.POST("/todo/create", TodoCreate)
+		app.POST("/todo/toggle", TodoToggle)
+		app.GET("/todo/new", TodoNew)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

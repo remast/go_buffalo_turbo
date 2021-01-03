@@ -1,0 +1,17 @@
+<li id="todo_item_<%= todoItem.ID %>" class="list-group-item">
+
+    <%= if (todoItem.Done) { %>
+        <s><%= todoItem.Name %></s>
+    <% } else { %>
+        <%= todoItem.Name %>
+    <% } %>
+
+    <%= form_for( todoItem, {action: todoTogglePath(), method: "POST"}) { %>
+        <%= f.HiddenTag("ID") %>
+        <%= if (todoItem.Done) { %>
+            <button type="submit" class="btn btn-secondary">Undo</button>
+        <% } else { %>
+            <button type="submit" class="btn btn-primary">Done</button>
+        <% } %>
+    <% } %>
+</li>
