@@ -43,8 +43,12 @@ func TodoToggle(c buffalo.Context) error {
 		}
 	}
 
-	id := "todo_item_" + todoItemID
-	return c.Render(http.StatusOK, r.Func("text/html; turbo-stream=*", createTurboWriter("todo/todo_item.plush.html", "replace", id)))
+	if acceptsTurboStream(c.Request()) {
+		id := "todo_item_" + todoItemID
+		return c.Render(http.StatusOK, r.Func("text/html; turbo-stream=*", createTurboWriter("todo/todo_item.plush.html", "replace", id)))
+	}
+
+	return c.Redirect(302, "/")
 }
 
 // TodoCreate default implementation.
