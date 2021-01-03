@@ -54,3 +54,5 @@ return c.Render(http.StatusOK, r.HTML("todo/new.plush.html"))
 ## What Next?
 
 Check out how to use Turbo Streams over WebSockets in my example [github.com/remast/go_websocket_turbo](https://github.com/remast/go_websocket_turbo)
+
+A must is the full hotwire demo implmented in Go [github.com/while1malloc0/hotwire-go-example](https://github.com/while1malloc0/hotwire-go-example).
