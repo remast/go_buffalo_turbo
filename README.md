@@ -1,6 +1,6 @@
 # Go Buffalo with Turbo Powers
 
-Modern, user-friendly web applications powered by Server Rendered HTML? This example shows you how to build a modern, user-friendly web application that's based on HTML and the [hotwire](https://hotwire.dev/) approach. We will develop a server rendered web application in [Go]() with [Buffalo](http://gobuffalo.io) enhanced by the [Turbo]() that powers [Basecamps](https://basecamp.com/) mail service [Hey](http://hey.com/).
+Modern, user-friendly web applications powered by Server Rendered HTML? This example shows how to build a modern, user-friendly web application based on HTML and the [hotwire](https://hotwire.dev/) approach. We will develop a server rendered web application in [Go]() with [Buffalo](http://gobuffalo.io) enhanced by the [Turbo]() that powers [Basecamps](https://basecamp.com/) mail service [Hey](http://hey.com/).
 
 ## Running the Example
 Run the example
