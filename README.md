@@ -49,7 +49,7 @@ if acceptsTurboStream(c.Request()) {
 	// Handle Turbo requests
 	turboAction := "replace"
 	turboDomID := "todo_new_form"
-	return c.Render(http.StatusOK, r.Func("text/html; turbo-stream=*", createTurboWriter("todo/new.plush.html", turboAction, turboDomID)))
+	return c.Render(http.StatusOK, r.Func("text/vnd.turbo-stream.html", createTurboWriter("todo/new.plush.html", turboAction, turboDomID)))
 }
 // Handle normal requests
 return c.Render(http.StatusOK, r.HTML("todo/new.plush.html"))

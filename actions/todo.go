@@ -45,7 +45,7 @@ func TodoToggle(c buffalo.Context) error {
 
 	if acceptsTurboStream(c.Request()) {
 		id := "todo_item_" + todoItemID
-		return c.Render(http.StatusOK, r.Func("text/html; turbo-stream=*", createTurboWriter("todo/todo_item.plush.html", "replace", id)))
+		return c.Render(http.StatusOK, r.Func("text/vnd.turbo-stream.html", createTurboWriter("todo/todo_item.plush.html", "replace", id)))
 	}
 
 	return c.Redirect(302, "/")
@@ -67,7 +67,7 @@ func TodoCreate(c buffalo.Context) error {
 		if acceptsTurboStream(c.Request()) {
 			turboAction := "replace"
 			turboDomID := "todo_new_form"
-			return c.Render(http.StatusOK, r.Func("text/html; turbo-stream=*", createTurboWriter("todo/new.plush.html", turboAction, turboDomID)))
+			return c.Render(http.StatusOK, r.Func("text/vnd.turbo-stream.html", createTurboWriter("todo/new.plush.html", turboAction, turboDomID)))
 		}
 
 		return c.Render(http.StatusOK, r.HTML("todo/new.plush.html"))
@@ -85,7 +85,7 @@ func TodoNew(c buffalo.Context) error {
 
 func acceptsTurboStream(request *http.Request) bool {
 	for _, acceptValue := range request.Header["Accept"] {
-		if strings.Contains(acceptValue, "text/html; turbo-stream") {
+		if strings.Contains(acceptValue, "text/vnd.turbo-stream.html") {
 			return true
 		}
 	}

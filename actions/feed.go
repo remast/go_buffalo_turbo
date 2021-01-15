@@ -10,7 +10,7 @@ import (
 
 // FeedIndex default implementation.
 func FeedIndex(c buffalo.Context) error {
-	time.Sleep(1 * time.Second)
+	time.Sleep(20 * time.Second)
 
 	names := []string{
 		"Chuck",
