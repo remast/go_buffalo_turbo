@@ -1,10 +1,13 @@
 package actions
 
 import (
+	"time"
+
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/envy"
 	forcessl "github.com/gobuffalo/mw-forcessl"
 	paramlogger "github.com/gobuffalo/mw-paramlogger"
+	"github.com/r3labs/sse/v2"
 	"github.com/unrolled/secure"
 
 	csrf "github.com/gobuffalo/mw-csrf"
@@ -50,6 +53,23 @@ func App() *buffalo.App {
 
 		// Setup and use translations:
 		app.Use(translations())
+
+		// Setup server sent events
+		server := sse.New()
+		server.CreateStream("messages")
+
+		go func() {
+			for {
+				event := `<turbo-stream action="prepend" target="feed-frame"><template><h1>CONTENT!!!</h1></template></turbo-stream>`
+				server.Publish("messages", &sse.Event{
+					Data: []byte(event),
+				})
+				app.Logger.Printf("Sending Server Sent Event.", event)
+				time.Sleep(5 * time.Second)
+			}
+		}()
+
+		app.GET("/events", buffalo.WrapHandlerFunc(server.HTTPHandler))
 
 		app.GET("/", TodoIndex)
 
