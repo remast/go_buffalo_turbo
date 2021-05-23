@@ -1,23 +1,23 @@
-<div class="row">
-    <div class="col-8">
-
-
-<h1>Your TODOs</h1>
-
 <%= if (len(todoItems) == 0) { %>
-    You don't have any TODOs. Go ahead and <a href="/todo/new">create one</a>!
+    <p class="empty-task-list alert alert-success mb-5" role="alert">All done!</p>
 <% } %>
 
-<ul class="list-group">
-<%= for (todoItem) in todoItems { %>
-    <%= partial("todo/todo_item.plush.html") %>
-<% } %>
-</ul>
-
+<%= if (len(todoItems) > 0) { %>
+<div class="task-list mb-5">
+    <ul class="list-unstyled">
+        <%= for (todoItem) in todoItems { %>
+        <%= partial("todo/todo_item.plush.html") %>
+        <% } %>
+    </ul>
 </div>
+<% } %>
+
+<%= partial("todo/new_form.plush.html") %>
+
+<!--
 <turbo-frame class="col-4" id="feed-frame" src="/feed">
     <div class="alert alert-light" role="alert">
         Loading feed ...
     </div>
 </turbo-frame>
-</div>
+-->

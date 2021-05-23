@@ -1,17 +1,5 @@
 <div id="todo_new_form">
-    <h1>Create New TODO</h1>
+    <h1>Add Task</h1>
 
-    <%= form_for( todoItem, {action: todoCreatePath(), method: "POST"}) { %>
-        <div class="row">
-        <div class="col-md-12">
-            <%= f.InputTag("Name") %>
-        </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-    
-    <% } %>
+    <%= partial("todo/new_form.plush.html") %>
 </div>

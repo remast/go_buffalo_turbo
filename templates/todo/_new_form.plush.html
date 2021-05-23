@@ -1,0 +1,11 @@
+<%= form_for( todoItem, {action: todoCreatePath(), method: "POST", class: "add-task-form row needs-validation"}) { %>
+    <div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-3">
+        <%= f.InputTag("Name", { label: "New Task", placeholder: "Add a task"}) %>
+    </div>
+    <div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 mb-3 d-flex flex-wrap align-content-start">
+        <button type="submit" class="add-task btn btn-primary flex-fill" style="margin-top: 32px">
+            Add
+            <span class="d-sm-none">Task</span>
+        </button>
+    </div>
+<% } %>

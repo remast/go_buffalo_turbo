@@ -77,6 +77,7 @@ func App() *buffalo.App {
 		app.GET("/ws", HandeWs)
 
 		app.GET("/", TodoIndex)
+		app.GET("/todo/completed", TodoCompleted)
 
 		app.GET("/feed", FeedIndex)
 

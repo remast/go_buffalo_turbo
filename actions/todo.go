@@ -27,8 +27,27 @@ type TodoItem struct {
 
 // TodoIndex default implementation.
 func TodoIndex(c buffalo.Context) error {
-	c.Set("todoItems", todoItems)
+	openTodoItems := make([]*TodoItem, 0)
+	for _, todoItem := range todoItems {
+		if !todoItem.Done {
+			openTodoItems = append(openTodoItems, todoItem)
+		}
+	}
+	c.Set("todoItem", &TodoItem{})
+	c.Set("todoItems", openTodoItems)
 	return c.Render(http.StatusOK, r.HTML("todo/index.plush.html"))
+}
+
+// TodoCompleted default implementation.
+func TodoCompleted(c buffalo.Context) error {
+	completedTodoItems := make([]*TodoItem, 0)
+	for _, todoItem := range todoItems {
+		if todoItem.Done {
+			completedTodoItems = append(completedTodoItems, todoItem)
+		}
+	}
+	c.Set("todoItems", completedTodoItems)
+	return c.Render(http.StatusOK, r.HTML("todo/completed.plush.html"))
 }
 
 // TodoToggle default implementation.
@@ -45,7 +64,7 @@ func TodoToggle(c buffalo.Context) error {
 
 	if acceptsTurboStream(c.Request()) {
 		id := "todo_item_" + todoItemID
-		return c.Render(http.StatusOK, r.Func("text/vnd.turbo-stream.html", createTurboWriter("todo/todo_item.plush.html", "replace", id)))
+		return c.Render(http.StatusOK, r.Func("text/vnd.turbo-stream.html", createTurboWriter("todo/todo_item.plush.html", "remove", id)))
 	}
 
 	return c.Redirect(302, "/")
@@ -57,6 +76,7 @@ func TodoCreate(c buffalo.Context) error {
 	if err := c.Bind(newTodoItem); err != nil {
 		return err
 	}
+	// Handle form errors
 	if newTodoItem.Name == "" {
 		c.Set("todoItem", newTodoItem)
 
