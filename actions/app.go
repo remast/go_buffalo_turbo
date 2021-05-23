@@ -1,12 +1,15 @@
 package actions
 
 import (
+	"log"
+	"net/http"
 	"time"
 
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/envy"
 	forcessl "github.com/gobuffalo/mw-forcessl"
 	paramlogger "github.com/gobuffalo/mw-paramlogger"
+	"github.com/gorilla/websocket"
 	"github.com/r3labs/sse/v2"
 	"github.com/unrolled/secure"
 
@@ -71,6 +74,8 @@ func App() *buffalo.App {
 
 		app.GET("/events", buffalo.WrapHandlerFunc(server.HTTPHandler))
 
+		app.GET("/ws", HandeWs)
+
 		app.GET("/", TodoIndex)
 
 		app.GET("/feed", FeedIndex)
@@ -82,6 +87,41 @@ func App() *buffalo.App {
 	}
 
 	return app
+}
+
+var upgrader = websocket.Upgrader{
+	ReadBufferSize:  1024,
+	WriteBufferSize: 1024,
+}
+
+func HandeWs(cc buffalo.Context) error {
+	upgrader.CheckOrigin = func(r *http.Request) bool { return true }
+
+	// upgrade this connection to a WebSocket
+	// connection
+	ws, err := upgrader.Upgrade(cc.Response(), cc.Request(), nil)
+	if err != nil {
+		log.Println(err)
+	}
+
+	log.Println("Client Connected")
+	err = ws.WriteMessage(1, []byte("Hi Client!"))
+	if err != nil {
+		log.Println(err)
+	}
+
+	go func() {
+		for {
+			event := `<turbo-stream action="prepend" target="feed-frame"><template><h1>CONTENT!!!</h1></template></turbo-stream>`
+			if err := ws.WriteMessage(1, []byte(event)); err != nil {
+				log.Println(err)
+				return
+			}
+			time.Sleep(5 * time.Second)
+		}
+	}()
+	return cc.Render(http.StatusOK, r.String("DONE"))
+
 }
 
 // translations will load locale files, set up the translator `actions.T`,

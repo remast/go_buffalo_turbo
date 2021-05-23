@@ -1,6 +1,7 @@
 
 <script>
-  Turbo.connectStreamSource(new EventSource("/events?stream=messages"));
+  //Turbo.connectStreamSource(new EventSource("/events?stream=messages"));
+  Turbo.connectStreamSource(new WebSocket("ws://localhost:3000/ws"));
 </script>
 <turbo-frame class="col-4" id="feed-frame">
   <h2>Feed</h2>
