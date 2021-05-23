@@ -1,12 +1,12 @@
-<%= if (len(todoItems) == 0) { %>
+<%= if (len(taskItems) == 0) { %>
     <p class="empty-completed-tasks-list alert alert-success mb-5" role="alert">No tasks have been completed yet.</p>
 <% } %>
 
-<%= if (len(todoItems) > 0) { %>
+<%= if (len(taskItems) > 0) { %>
     <ul class="completed-tasks-list mb-5">
-        <%= for (todoItem) in todoItems { %>
+        <%= for (taskItem) in taskItems { %>
         <li>
-            <span><%= todoItem.Name %></span>
+            <span><%= taskItem.Name %></span>
             <!--
             <span th:title="${DateUtils.formatShortDateTime(task.completedDate, locale)}" th:text="${DateUtils.formatRelativeDate(task.completedDate, locale)}" class="text-secondary ps-2"></span>
             -->

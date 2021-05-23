@@ -1,18 +1,18 @@
-<%= if (len(todoItems) == 0) { %>
+<%= if (len(taskItems) == 0) { %>
     <p class="empty-task-list alert alert-success mb-5" role="alert">All done!</p>
 <% } %>
 
-<%= if (len(todoItems) > 0) { %>
+<%= if (len(taskItems) > 0) { %>
 <div class="task-list mb-5">
     <ul class="list-unstyled">
-        <%= for (todoItem) in todoItems { %>
-        <%= partial("todo/todo_item.plush.html") %>
+        <%= for (taskItem) in taskItems { %>
+        <%= partial("task/item.plush.html") %>
         <% } %>
     </ul>
 </div>
 <% } %>
 
-<%= partial("todo/new_form.plush.html") %>
+<%= partial("task/new_form.plush.html") %>
 
 <!--
 <turbo-frame class="col-4" id="feed-frame" src="/feed">

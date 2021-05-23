@@ -57,6 +57,12 @@ func App() *buffalo.App {
 		// Setup and use translations:
 		app.Use(translations())
 
+		app.GET("/", TaskIndex)
+		app.GET("/task/completed", TaskCompleted)
+		app.POST("/task/create", TaskCreate)
+		app.POST("/task/check", TaskCheck)
+		app.GET("/task/new", TaskNew)
+
 		// Setup server sent events
 		server := sse.New()
 		server.CreateStream("messages")
@@ -73,17 +79,10 @@ func App() *buffalo.App {
 		}()
 
 		app.GET("/events", buffalo.WrapHandlerFunc(server.HTTPHandler))
-
 		app.GET("/ws", HandeWs)
-
-		app.GET("/", TodoIndex)
-		app.GET("/todo/completed", TodoCompleted)
 
 		app.GET("/feed", FeedIndex)
 
-		app.POST("/todo/create", TodoCreate)
-		app.POST("/todo/toggle", TodoToggle)
-		app.GET("/todo/new", TodoNew)
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

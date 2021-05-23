@@ -1,17 +1,17 @@
-<li id="todo_item_<%= todoItem.ID %>" class="form-check">
+<li id="task_item_<%= taskItem.ID %>" class="form-check">
         <!--
         <span th:if="${task.dueDate}" th:text="${DateUtils.formatShortDate(task.dueDate, locale)}" class="text-secondary ps-2"></span>
         -->
-        <%= form_for( todoItem, {action: todoTogglePath(), method: "POST", id: "form_todo_item_" + todoItem.ID}) { %>
-            <input type="checkbox" name="completedTasks[]" id="completedTasks-<%= todoItem.ID %>" value="<%= todoItem.ID %>" class="form-check-input completed-task" 
-            onChange="document.getElementById('form_todo_item_<%= todoItem.ID %>').requestSubmit()"
+        <%= form_for( taskItem, {action: taskCheckPath(), method: "POST", id: "form_task_item_" + taskItem.ID}) { %>
+            <input type="checkbox" name="completedTasks[]" id="completedTasks-<%= taskItem.ID %>" value="<%= taskItem.ID %>" class="form-check-input completed-task" 
+            onChange="document.getElementById('form_task_item_<%= taskItem.ID %>').requestSubmit()"
             />
-            <label for="completedTasks-<%= todoItem.ID %>" class="form-check-label">
-            <span><%= todoItem.Name %></span>
+            <label for="completedTasks-<%= taskItem.ID %>" class="form-check-label">
+            <span><%= taskItem.Name %></span>
 
             
             <%= f.HiddenTag("ID") %>
-            <%= if (todoItem.Done) { %>
+            <%= if (taskItem.Done) { %>
                 <button type="submit" class="btn btn-secondary">Undo</button>
             <% } else { %>
                 <button type="submit" class="btn btn-remove">
