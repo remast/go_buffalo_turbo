@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Sample page</title>
+  <script src="https://unpkg.com/@hotwired/turbo@7.0.0-beta.5/dist/turbo.es5-umd.js"></script>
+</head>
+
+<body>
+  <h1>Form Page</h1>
+  <turbo-frame id="my_frame">
+    <p>
+      <a href="/samples/turbo-frame_01/result.html">My framed Link</a>
+    </p>
+  </turbo-frame>
+
+  <turbo-frame id="my_other_frame">
+    <p>
+      <a href="/samples/turbo-frame_01/result_frame.html">My other framed Link</a>
+    </p>
+  </turbo-frame>
+
+  <p>
+      <a href="/samples/turbo-frame_01/result.html" data-turbo-frame="my_frame">Link to other Frame</a>
+  </p>
+
+</body>
+
+</html>

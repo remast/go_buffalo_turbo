@@ -35,6 +35,11 @@ func TaskIndex(c buffalo.Context) error {
 	}
 	c.Set("taskItem", &TaskItem{})
 	c.Set("taskItems", openTaskItems)
+
+	if isTurboFrame(c.Request(), "tasks_frame") {
+		return c.Render(http.StatusOK, r.Func("text/html", createTurboPlain("task/index.plush.html")))
+	}
+
 	return c.Render(http.StatusOK, r.HTML("task/index.plush.html"))
 }
 
@@ -62,10 +67,12 @@ func TaskCheck(c buffalo.Context) error {
 		}
 	}
 
+	/**
 	if acceptsTurboStream(c.Request()) {
 		id := "task_item_" + taskItemID
 		return c.Render(http.StatusOK, r.Func("text/vnd.turbo-stream.html", createTurboWriter("task/item.plush.html", "remove", id)))
 	}
+	*/
 
 	return c.Redirect(302, "/")
 }
@@ -87,7 +94,7 @@ func TaskCreate(c buffalo.Context) error {
 		if acceptsTurboStream(c.Request()) {
 			turboAction := "replace"
 			turboDomID := "task_new_form"
-			return c.Render(http.StatusOK, r.Func("text/vnd.turbo-stream.html", createTurboWriter("task/new.plush.html", turboAction, turboDomID)))
+			return c.Render(http.StatusOK, r.Func("text/vnd.turbo-stream.html", createTurboWriter("task/new_form.plush.html", turboAction, turboDomID)))
 		}
 
 		return c.Render(http.StatusOK, r.HTML("task/new.plush.html"))
@@ -106,6 +113,15 @@ func TaskNew(c buffalo.Context) error {
 func acceptsTurboStream(request *http.Request) bool {
 	for _, acceptValue := range request.Header["Accept"] {
 		if strings.Contains(acceptValue, "text/vnd.turbo-stream.html") {
+			return true
+		}
+	}
+	return false
+}
+
+func isTurboFrame(request *http.Request, frameId string) bool {
+	for _, acceptValue := range request.Header["Turbo-Frame"] {
+		if strings.Contains(acceptValue, frameId) {
 			return true
 		}
 	}

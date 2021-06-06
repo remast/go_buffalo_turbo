@@ -13,7 +13,7 @@ You'll see the app with a list of TODOs and a feed of todos on the right:
 ![alt text](images/todo_overview.jpg "TODO App Overview")
 
 ### Using the Example without Turbo
-You can also try the example without Turbo and without any JavaScript at all. To use the example without Turbo point your browser to [http://127.0.0.1:3000?skipTurbo=true](http://127.0.0.1:3000?skipTurbo=true).
+You can also try the example without Turbo and without any JavaScript at all. To use the example without Turbo just set the cookie `skipTurbo` to `true`.
 
 ## Setting up Turbo
 Turbo is set up by including the Turbo JavaScript in the HTML header. In Buffalo the header is rendered by the layout template `application.plush.html`.

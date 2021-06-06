@@ -1,4 +1,4 @@
-<%= form_for( taskItem, {action: taskCreatePath(), method: "POST", class: "add-task-form row needs-validation"}) { %>
+  <%= form_for( taskItem, {action: taskCreatePath(), method: "POST", class: "add-task-form row needs-validation"}) { %>
     <div class="col-xl-9 col-lg-8 col-md-6 col-sm-6 mb-3">
         <%= f.InputTag("Name", { label: "New Task", placeholder: "Add a task"}) %>
     </div>
@@ -8,4 +8,4 @@
             <span class="d-sm-none">Task</span>
         </button>
     </div>
-<% } %>
+  <% } %>

@@ -1,31 +1,6 @@
-
-<script>
-  //Turbo.connectStreamSource(new EventSource("/events?stream=messages"));
-  Turbo.connectStreamSource(new WebSocket("ws://localhost:3000/ws"));
-</script>
-<turbo-frame class="col-4" id="feed-frame">
-  <h2>Feed</h2>
-
-  <%= for (feed) in feeds { %>
-    <div class="card">
-      <div class="card-body">
-        <%= feed %>
-      </div>
-    </div>
-    <% } %>
-
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item"><a class="page-link" href="/feed?previous=10">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a></li>
-          <li class="page-item">
-            <a class="page-link" href="/feed?next=10">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+<h2>Feed</h2>
+<turbo-frame class="col-4" id="feed-frame" src="/feed-frame">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
 </turbo-frame>

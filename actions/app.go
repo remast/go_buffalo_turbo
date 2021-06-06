@@ -57,6 +57,8 @@ func App() *buffalo.App {
 		// Setup and use translations:
 		app.Use(translations())
 
+		app.Use(SkipTurboMiddleware)
+
 		app.GET("/", TaskIndex)
 		app.GET("/task/completed", TaskCompleted)
 		app.POST("/task/create", TaskCreate)
@@ -69,7 +71,7 @@ func App() *buffalo.App {
 
 		go func() {
 			for {
-				event := `<turbo-stream action="prepend" target="feed-frame"><template><h1>CONTENT!!!</h1></template></turbo-stream>`
+				event := RandomFeed("feed-frame-sse")
 				server.Publish("messages", &sse.Event{
 					Data: []byte(event),
 				})
@@ -82,11 +84,34 @@ func App() *buffalo.App {
 		app.GET("/ws", HandeWs)
 
 		app.GET("/feed", FeedIndex)
+		app.GET("/feed_slow", FeedIndexSlow)
+		app.GET("/feed_sse", FeedIndexWithSSE)
+		app.GET("/feed_ws", FeedIndexWithWebsocket)
+		app.GET("/feed-frame", FeedFrame)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 
 	return app
+}
+
+func SkipTurboMiddleware(next buffalo.Handler) buffalo.Handler {
+	return func(c buffalo.Context) error {
+		skipTurboCookieValue, _ := c.Cookies().Get("skipTurbo")
+		if skipTurboCookieValue == "" {
+			skipTurboCookieValue = "false"
+			skipTurboCookie := http.Cookie{
+				Name:    "skipTurbo",
+				Value:   skipTurboCookieValue,
+				Path:    "/",
+				Expires: time.Now().Add(30 * 24 * time.Hour),
+			}
+			http.SetCookie(c.Response(), &skipTurboCookie)
+		}
+		c.Set("skipTurbo", skipTurboCookieValue == "true")
+
+		return next(c)
+	}
 }
 
 var upgrader = websocket.Upgrader{
@@ -105,14 +130,10 @@ func HandeWs(cc buffalo.Context) error {
 	}
 
 	log.Println("Client Connected")
-	err = ws.WriteMessage(1, []byte("Hi Client!"))
-	if err != nil {
-		log.Println(err)
-	}
 
 	go func() {
 		for {
-			event := `<turbo-stream action="prepend" target="feed-frame"><template><h1>CONTENT!!!</h1></template></turbo-stream>`
+			event := RandomFeed("feed-frame-ws")
 			if err := ws.WriteMessage(1, []byte(event)); err != nil {
 				log.Println(err)
 				return
