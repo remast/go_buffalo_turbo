@@ -1,7 +1,11 @@
 <script>
-  Turbo.connectStreamSource(new WebSocket("ws://localhost:3000/ws"));
+  function connectTurbo() {
+    Turbo.connectStreamSource(new WebSocket("ws://localhost:3000/ws"));
+  }
 </script>
   <h2>Feed (with WebSockets)</h2>
+
+  <button type="button" class="btn btn-primary" onclick="connectTurbo()">Connect WebSocket</button>
 
   <turbo-frame class="col-4" id="feed-frame-ws">
     <%= for (feed) in feeds { %>

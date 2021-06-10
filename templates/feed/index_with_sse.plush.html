@@ -1,7 +1,12 @@
 <script>
-  Turbo.connectStreamSource(new EventSource("/events?stream=messages"));
+  function connectTurbo() {
+    Turbo.connectStreamSource(new EventSource("/events?stream=messages"));
+  }
+
 </script>
   <h2>Feed (with Server Sent Events)</h2>
+
+  <button type="button" class="btn btn-primary" onclick="connectTurbo()">Connect SSE</button>
 
   <turbo-frame class="col-4" id="feed-frame-sse">
     <%= for (feed) in feeds { %>

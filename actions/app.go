@@ -67,6 +67,7 @@ func App() *buffalo.App {
 
 		// Setup server sent events
 		server := sse.New()
+		server.BufferSize = 3
 		server.CreateStream("messages")
 
 		go func() {

@@ -1,14 +1,12 @@
 package actions
 
 import (
-	"io"
 	"math/rand"
 	"net/http"
 	"strings"
 	"time"
 
 	"github.com/gobuffalo/buffalo"
-	"github.com/gobuffalo/buffalo/render"
 )
 
 // FeedIndex default implementation.
@@ -57,13 +55,6 @@ func FeedFrame(c buffalo.Context) error {
 	c.Set("feeds", feeds)
 
 	return c.Render(http.StatusOK, r.Func("text/html", createTurboPlain("feed/feed.plush.html")))
-}
-
-func createTurboPlain(template string) render.RendererFunc {
-	return func(w io.Writer, d render.Data) error {
-		r.HTML(template, "turbo/plain.plush.html").Render(w, d)
-		return nil
-	}
 }
 
 var names []string
