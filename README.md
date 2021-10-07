@@ -21,7 +21,7 @@ Turbo is set up by including the Turbo JavaScript in the HTML header. In Buffalo
 Add the Turbo JavaScript to [application.plush.html](templates/application.plush.html):
 ```html
 <head>
-	<script src="https://unpkg.com/@hotwired/turbo@7.0.0-beta.1/dist/turbo.es5-umd.js"></script>
+	<script src="https://unpkg.com/@hotwired/turbo@7.0.1/dist/turbo.es5-umd.js"></script>
 	...
 </head>
 ```
