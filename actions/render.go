@@ -1,12 +1,13 @@
 package actions
 
 import (
+	"go_buffalo_turbo/public"
+	"go_buffalo_turbo/templates"
+
 	"github.com/gobuffalo/buffalo/render"
-	"github.com/gobuffalo/packr/v2"
 )
 
 var r *render.Engine
-var assetsBox = packr.New("app:assets", "../public")
 
 func init() {
 	r = render.New(render.Options{
@@ -14,8 +15,8 @@ func init() {
 		HTMLLayout: "application.plush.html",
 
 		// Box containing all of the templates:
-		TemplatesBox: packr.New("app:templates", "../templates"),
-		AssetsBox:    assetsBox,
+		TemplatesFS: templates.FS(),
+		AssetsFS:    public.FS(),
 
 		// Add template helpers here:
 		Helpers: render.Helpers{

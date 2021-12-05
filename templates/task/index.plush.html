@@ -7,14 +7,14 @@
   <div class="task-list mb-5">
     <ul class="list-unstyled">
         <%= for (taskItem) in taskItems { %>
-        <%= partial("task/item.plush.html") %>
+        <%= partial("task_item.plush.html") %>
         <% } %>
     </ul>
   </div>
 <% } %>
 
   <div id="task_new_form">
-<%= partial("task/new_form.plush.html") %>
+<%= partial("task_new_form.plush.html") %>
   </div>
 </turbo-frame>
 

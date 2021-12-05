@@ -1,6 +1,7 @@
 package actions
 
 import (
+	"go_buffalo_turbo/public"
 	"log"
 	"net/http"
 	"time"
@@ -90,7 +91,7 @@ func App() *buffalo.App {
 		app.GET("/feed_ws", FeedIndexWithWebsocket)
 		app.GET("/feed-frame", FeedFrame)
 
-		app.ServeFiles("/", assetsBox) // serve files from the public directory
+		app.ServeFiles("/", http.FS(public.FS())) // serve files from the public
 	}
 
 	return app
