@@ -13,7 +13,7 @@ require (
 	github.com/gobuffalo/suite/v3 v3.0.2
 	github.com/gobuffalo/validate/v3 v3.3.1
 	github.com/gorilla/websocket v1.4.2
-	github.com/r3labs/sse/v2 v2.3.2
+	github.com/r3labs/sse/v2 v2.10.0
 	github.com/unrolled/secure v1.0.8
 )
 
