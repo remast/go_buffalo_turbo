@@ -14,7 +14,7 @@ require (
 	github.com/gobuffalo/validate/v3 v3.3.1
 	github.com/gorilla/websocket v1.5.1
 	github.com/r3labs/sse/v2 v2.10.0
-	github.com/unrolled/secure v1.0.8
+	github.com/unrolled/secure v1.14.0
 )
 
 require (

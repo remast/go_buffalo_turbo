@@ -1361,6 +1361,8 @@ github.com/unrolled/secure v0.0.0-20190103195806-76e6d4e9b90c/go.mod h1:mnPT77IA
 github.com/unrolled/secure v1.0.7/go.mod h1:uGc1OcRF8gCVBA+ANksKmvM85Hka6SZtQIbrKc3sHS4=
 github.com/unrolled/secure v1.0.8 h1:JaMvKbe4CRt8oyxVXn+xY+6jlqd7pyJNSVkmsBxxQsM=
 github.com/unrolled/secure v1.0.8/go.mod h1:fO+mEan+FLB0CdEnHf6Q4ZZVNqG+5fuLFnP8p0BXDPI=
+github.com/unrolled/secure v1.14.0 h1:u9vJTU/pR4Bny0ntLUMxdfLtmIRGvQf2sEFuA0TG9AE=
+github.com/unrolled/secure v1.14.0/go.mod h1:BmF5hyM6tXczk3MpQkFf1hpKSRqCyhqcbiQtiAF7+40=
 github.com/urfave/cli v1.20.0/go.mod h1:70zkFmudgCuE/ngEzBv17Jvp/497gISqfk5gWijbERA=
 github.com/urfave/cli v1.22.1/go.mod h1:Gos4lmkARVdJ6EkW0WaNv/tZAAMe9V7XWyB60NtXRu0=
 github.com/urfave/negroni v1.0.0 h1:kIimOitoypq34K7TG7DUaJ9kq/N4Ofuwi1sjz0KipXc=
