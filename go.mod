@@ -12,7 +12,7 @@ require (
 	github.com/gobuffalo/packr/v2 v2.8.3
 	github.com/gobuffalo/suite/v3 v3.0.2
 	github.com/gobuffalo/validate/v3 v3.3.1
-	github.com/gorilla/websocket v1.5.1
+	github.com/gorilla/websocket v1.5.3
 	github.com/r3labs/sse/v2 v2.10.0
 	github.com/unrolled/secure v1.14.0
 )
